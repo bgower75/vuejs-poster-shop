@@ -19,6 +19,7 @@ new Vue ({
         if (this.cart[i].id === item.id) { //if item is found in the cart show the quantity
           found = true;
           this.cart[i].qty++;
+          break;
         }
       }
       if (!found) { //if item not in the cart put it in and show quantity and price

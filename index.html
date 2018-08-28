@@ -22,7 +22,7 @@
         <div class="products">
             <div class="product" v-for="(item, index) in items"> <!--loops through the items stored in js script-->
                 <h4 class="product-title">{{ item.title }}</h4> <!--gets item title from store in js script-->
-                <button class="add-to-cart" v-on:click='addItem(index)'>Add to cart</button> <!--adds item to cart when click add to cart button-->
+                <button class="add-to-cart btn" v-on:click='addItem(index)'>Add to cart</button> <!--adds item to cart when click add to cart button-->
             </div>
         </div>
         <div class="cart">
