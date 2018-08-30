@@ -17,12 +17,29 @@
 <div id="app">
     <div class="header">
         <h1>Vue.js Poster Store</h1>
+        <form class="searchbar" v-on:submit.prevent="onSubmit"> <!--prevents the page reloading each time the button is clicked by using an event modifier-->
+            <input v-model="search" placeholder="Search for posters"> <!--link the input to the data property in js using a v-model directive.-->
+            <input type="submit" value="Search" class="btn">
+        </form>
     </div>
     <div class="main">
         <div class="products">
+            <div v-if="loading">
+                Loading....
+            </div>
+            <div class="search-results" v-else >
+                Found {{ items.length }} results for search term <em>{{ lastSearch }}</em>.
+            </div>
             <div class="product" v-for="(item, index) in items"> <!--loops through the items stored in js script-->
-                <h4 class="product-title">{{ item.title }}</h4> <!--gets item title from store in js script-->
-                <button class="add-to-cart btn" v-on:click='addItem(index)'>Add to cart</button> <!--adds item to cart when click add to cart button-->
+                <div>
+                    <div class="product-image">
+                        <img v-bind:src="item.link"> <!--bind src to the item link to display the image-->
+                    </div>
+                </div>
+                <div>
+                    <h4 class="product-title">{{ item.title }}</h4> <!--gets item title from store in js script-->
+                    <button class="add-to-cart btn" v-on:click='addItem(index)'>Add to cart</button> <!--adds item to cart when click add to cart button-->
+                </div>
             </div>
         </div>
         <div class="cart">
@@ -49,6 +66,7 @@
 <!-- Scripts -->
 <script src="/reload/reload.js"></script> <!--live reloading-->
 <script src="node_modules/vue/dist/vue.js"></script> <!--adding in vue library to project-->
+<script src="node_modules/vue-resource/dist/vue-resource.js"></script> <!--adding in vue-resource to searching-->
 <script type="text/javascript" src="public/script.js"></script>
 
 </body>
