@@ -229,3 +229,35 @@ h1 {
 .cart ul .cart-item button {
     margin-right: 3px;
 }
+
+.loading {
+    font: italic 400 20px Arial, Helvetica, sans-serif;
+    width: 50px;
+    text-align: left;
+}
+
+.loading > div {
+    width: 10px;
+    height: 10px;
+    background-color: #333;
+    border-radius: 100%;
+    display: inline-block;
+    animation: sk-bouncedelay 1.4s infinite ease-in-out both;
+}
+
+.loading .bounce1 {
+    animation-delay: -0.32s;
+}
+
+.loading .bounce2 {
+    animation-delay: -0.32s;
+}
+
+@keyframes sk-bouncedelay {
+    0%, 80%, 100% {
+        transform: scale(0);
+    }
+    40% {
+        transform: scale(1.0);
+    }
+}
