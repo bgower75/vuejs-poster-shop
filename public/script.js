@@ -5,9 +5,13 @@ new Vue ({
     total: 0,
     items: [],
     cart: [],
-    search: '',
+    search: 'Sebastian',
     lastSearch: '',
-    loading: false
+    loading: false,
+    price: PRICE
+  },
+  mounted: function () {
+    this.onSubmit(); //when page loads it has done a default search so the page is not empty
   },
   methods: {
     addItem: function (index) {

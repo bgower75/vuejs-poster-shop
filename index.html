@@ -41,6 +41,7 @@
                 </div>
                 <div>
                     <h4 class="product-title">{{ item.title }}</h4> <!--gets item title from store in js script-->
+                    <p>Price: {{ price | currency }}</p>
                     <button class="add-to-cart btn" v-on:click='addItem(index)'>Add to cart</button> <!--adds item to cart when click add to cart button-->
                 </div>
             </div>
@@ -56,11 +57,13 @@
                 </li>
             </ul>
             <div>
-                <div v-if="cart.length">
+                <transition name="fade">
+                    <div v-if="cart.length">
                         <div> Total: {{ total | currency }} </div> <!--gets the total and formats to currency-->
-                    </div>
-                    <div class="empty-cart" v-else>No items in the cart</div>
-                <!-- No items in the cart. -->
+                        </div>
+                    <div class="empty-cart" v-if="cart.length === 0">No items in the cart</div>
+                    <!-- No items in the cart. -->
+                </transition>
             </div>
         </div>
     </div>
