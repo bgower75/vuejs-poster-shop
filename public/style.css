@@ -140,9 +140,9 @@ h1 {
     margin-top: 0;
 }
 
-.product > div:first-child {
+/* .product > div:first-child {
 
-}
+} */
 
 .product > div:last-child {
     margin-left: 1rem;
@@ -209,9 +209,9 @@ h1 {
     border-bottom: 1px solid #E9E9E9;
 }
 
-.cart ul .cart-item .item-title {
+/* .cart ul .cart-item .item-title {
 
-}
+} */
 
 .cart ul .cart-item .item-price {
     font-weight: bold;

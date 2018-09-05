@@ -57,14 +57,17 @@
                 </li>
             </ul>
             <div>
-                <!--transition fade not working-->
                 <transition name="fade">
+                    <!--transition fade not working-->
                     <div v-if="cart.length">
-                        <div> Total: {{ total | currency }} </div> <!--gets the total and formats to currency-->
-                        </div>
-                    <div class="empty-cart" v-if="cart.length === 0">No items in the cart</div>
-                    <!-- No items in the cart. -->
+                        <div>
+                            Total: {{ total | currency }}
+                        </div> <!--gets the total and formats to currency-->
+                    </div>
                 </transition>
+                    <div v-if="cart.length === 0" class="empty-cart" >
+                        No items in the cart
+                    </div>
             </div>
         </div>
     </div>
