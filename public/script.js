@@ -1,10 +1,12 @@
 var PRICE = 9.99;
+var LOAD_NUM = 10;
 new Vue ({
   el: '#app',
   data: {
     total: 0,
     items: [],
     cart: [],
+    results: [],
     search: 'Sebastian',
     lastSearch: '',
     loading: false,
@@ -55,7 +57,8 @@ new Vue ({
       this.loading = true;
       this.$http.get('/search/'.concat(this.search)).then(function (res) { //getting results from imgur server using /search/:query returning results that relate to what was input in the search box
         this.lastSearch = this.search; //set the lastsearch to what was last entered in the input field
-        this.items = res.data; //data received now put into items
+        this.results = res.data; //data received now put into items
+        this.items = res.data.slice(0, LOAD_NUM); //only first 10 shown
         this.loading = false;
       });
     }
@@ -66,3 +69,6 @@ new Vue ({
     }
   }
 });
+
+var elem = document.getElementById('product-list-bottom')
+var watcher = scrollMonitor(elem); //must pass in a dom node reference
