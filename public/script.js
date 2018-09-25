@@ -10,10 +10,18 @@ new Vue ({
     search: 'Sebastian',
     lastSearch: '',
     loading: false,
-    price: PRICE
+    price: PRICE,
+
   },
   mounted: function () {
     this.onSubmit(); //when page loads it has done a default search so the page is not empty
+
+    var vueInstance = this; //solving scope issue to be able to watcher
+    var elem = document.getElementById('product-list-bottom') //dom node reference
+    var watcher = scrollMonitor.create(elem); //must pass in a dom node reference
+    watcher.enterViewport(function () { //when reached bottom of the screen
+      vueInstance.appendItems();
+    })
   },
   methods: {
     addItem: function (index) {
@@ -58,17 +66,25 @@ new Vue ({
       this.$http.get('/search/'.concat(this.search)).then(function (res) { //getting results from imgur server using /search/:query returning results that relate to what was input in the search box
         this.lastSearch = this.search; //set the lastsearch to what was last entered in the input field
         this.results = res.data; //data received now put into items
-        this.items = res.data.slice(0, LOAD_NUM); //only first 10 shown
+        this.appendItems();
         this.loading = false;
       });
+    },
+    appendItems: function () { //append items to the page when reach watcher by scrolling to bottom of screen
+      if (this.items.length < this.results.length) {
+        var append = this.results.slice(this.items.length, this.items.length + LOAD_NUM); //add 10 each time
+        this.items = this.items.concat(append); //load number of items in append
+      }
     }
   },
   filters: {
     currency: function (price) {
       return '£'.concat(price.toFixed(2)); //set the price to have a £ infront and also convert to a 2 decimal string value
     }
+  },
+  computed: {
+    noMoreItems: function () {
+      return this.items.length === this.results.length && this.results.length > 0;
+    }
   }
-});
-
-var elem = document.getElementById('product-list-bottom')
-var watcher = scrollMonitor(elem); //must pass in a dom node reference
+})
